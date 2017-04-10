@@ -1,0 +1,248 @@
+%\documentclass{tikzposter}
+\documentclass[25pt, a0paper,
+margin=0mm, innermargin=15mm, blockverticalspace=15mm, colspace=15mm, subcolspace=8mm]{tikzposter}
+\usepackage{trace}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage[no-math]{fontspec}
+\usepackage[vargreek-shape=unicode]{unicode-math}
+%\RequirePackage{lualatex-math}
+\newfontfeature{Microtype}{protrusion=default;expansion=default;}
+
+% Maths
+\setmathfont{XITS Math}
+%\setmathfont{Cambria Math}
+%\setmathfont{Neo Euler}
+%\setmathfont[range={"02660-"0266F}]{Asana Math}
+%\setmathfont[range={"02420-"0242F}]{Asana Math}
+
+% Futura
+% \setmainfont[Renderer=Basic,Microtype,Ligatures=TeX]{Futura Std}
+% \setsansfont[Scale=MatchLowercase
+% %,Mapping=tex-text
+% ,Ligatures=TeX
+% ,BoldFont=*Bold%
+% ,BoldItalicFont=*BoldOblique%
+% ,ItalicFont=*BookOblique%
+%  ]{Futura Std}
+% \setmathfont[range=\mathit/{latin,Latin}, Scale=MatchUppercase]{Futura Std Book Oblique}
+
+% Optima
+% \setmainfont[Renderer=Basic,Microtype,Ligatures=TeX,
+% BoldFont=*Bold%
+% ,BoldItalicFont=*BoldItalic%
+% ,ItalicFont=*Italic%
+% ]{OptimaLT Std}
+% \setsansfont[Scale=MatchLowercase
+% %,Mapping=tex-text
+% ,Ligatures=TeX
+% ,BoldFont=OptimaLTStdBlack%
+% ,BoldItalicFont=OptimaLTStdBlackItalic%
+% ,ItalicFont=*Italic%
+%  ]{OptimaLT Std DemiBold}
+
+% \setmathfont[range=\mathit/{latin,Latin},
+% Scale=MatchUppercase]{OptimaLT Std DemiBold Italic}
+
+% tt
+% \setmonofont[Scale=MatchLowercase]{Consolas}
+
+
+%\setmainfont[Renderer=Basic,Microtype,Ligatures=TeX]{Futura Std}
+%\setmainfont[Microtype,Ligatures=TeX]{Constantia}
+%\setsansfont[Ligatures=TeX,Scale=MatchLowercase]{Calibri}
+
+
+%\setmathfont[Numbers=Lining, Scale=MatchUppercase]{Futura Std}
+
+
+%\def\mathvisiblespace{\mathchar"02FD}
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\newcommand{\email}[1]{\href{mailto:#1}{\textsf{#1}}}
+%\usepackage{url}
+\title{\parbox{\linewidth}{\centering A Heuristic Method for Large-Scale Cognitive-Diagnostic Computerized Adaptive Testing}}
+%\titlegraphic{\includegraphics[width=0.7\textwidth]{Logo_Supelec}}
+\author{\centering
+  \begin{tabular}{ccccc}
+    Jill-Jênn Vie & Fabrice Popineau & Françoise Tort & Benjamin Marteau & Nathalie Denos \\
+    RIKEN Center for Advanced & Laboratoire de recherche & ENS Paris-Saclay & French Ministry of Education & Université Grenoble-Alpes\\
+Intelligence Project (AIP) & en informatique (LRI) & Cachan, France & Paris, France & Grenoble, France \\
+Tokyo, Japan & Orsay, France &  \texttt{francoise.tort} & \texttt{benjamin.marteau} & \texttt{nathalie.denos} \\
+\texttt{vie@jill-jenn.net} & \texttt{fabrice.popineau@lri.fr} & \texttt{@stef.ens-cachan.fr} & \texttt{@education.gouv.fr} & \texttt{@univ-grenoble-alpes.fr}
+  \end{tabular}
+    }
+%\institute{\raggedleft SUPELEC Systems Sciences (E3S), Computer Science Department, Gif-sur-Yvette, France \\[8mm]
+%  \hfill \email{\{fabrice.popineau,georges.dubus,yolaine.bourda\}@supelec.fr}
+%}
+
+%\usetheme{Basic}
+\usetheme{Simple}
+%\usetheme{Wave}
+%\usetitlestyle{VerticalShading}
+%\usebackgroundstyle{VerticalGradation}
+%\usebackgroundstyle{Rays}
+\usecolorpalette{BrownBlueOrange}
+\makeatletter
+\renewcommand\TP@maketitle{%
+  \begin{minipage}{0.06\linewidth}
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/logo-cs.png}\\[1em]
+    \includegraphics[width=0.8\textwidth]{figures/logo-men.pdf}
+  \end{minipage}
+   \begin{minipage}{0.87\linewidth}
+        \centering
+        \color{titlefgcolor}
+        {\bfseries \Huge \sc \@title \par}
+        \vspace*{1em}
+        {\Large
+          \@author \par}
+    \end{minipage}%
+    \hfill
+    \begin{minipage}{0.06\linewidth}
+      \centering
+    \includegraphics[width=0.8\textwidth]{figures/logo-ensps.jpg}\\[1em]
+    \includegraphics[width=0.8\textwidth]{figures/logo-lri.pdf}
+    \end{minipage}
+}
+\makeatother
+
+\usepackage{theorem}
+\theoremstyle{myplain}
+\newtheorem{transformation}{Transformation}
+% \newtheorem{theorem}{Theorem}
+%\theoremstyle{definition}
+% \newtheorem{definition}{Definition}
+\newcommand{\concprio}{\rangle\kern-0.15em\rangle}
+
+%\usepackage{tikz}
+\usepackage{tikz-qtree}
+
+%\setbeameroption{show notes}
+\usetikzlibrary{arrows,arrows.meta,automata,shapes,intersections,mindmap,trees,shadows,fit,positioning,calc,matrix,decorations,chains,external,3d}
+\makeatletter
+\tikzoption{canvas is xy plane at z}[]{%
+\def\tikz@plane@origin{\pgfpointxyz{0}{0}{#1}}%
+\def\tikz@plane@x{\pgfpointxyz{1}{0}{#1}}%
+\def\tikz@plane@y{\pgfpointxyz{0}{1}{#1}}%
+\tikz@canvas@is@plane
+}
+\makeatother
+\usepackage{listings}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\newcommand{\Gproc}{\textbf{proc }}
+\newcommand{\GendProc}{\textbf{ endProc}}
+\newcommand{\Gif}{\textbf{if }}
+\newcommand{\Gthen}{\textbf{ then }}
+\newcommand{\Gelse}{\textbf{ else }}
+\newcommand{\Gwhile}{\textbf{while }}
+\newcommand{\Gdo}{\textbf{ do }}
+\newcommand{\mprefer}{\,\rangle\,}
+\newcommand{\GendIf}{\textbf{ endIf }}
+\newcommand{\GendWhile}{\textbf{ endWhile }}
+\newcommand{\affp}{\textit{aff\/}_p}
+\newcommand{\set}[1]{\{#1\}}
+
+\newcommand{\Gleft}[1]{G_{#1}^{\textit{left}}}
+\newcommand{\Gright}[1]{G_{#1}^{\textit{right}}}
+\newcommand{\Gmiddle}[1]{G_{#1}}
+
+\newcommand{\prefer}{\rangle}
+
+\newcommand{\alert}[1]{{\color{red!70!black} #1}}
+
+\newcommand{\bs}{\textbackslash}   % backslash
+\newcommand{\cmd}[1]{{\bf \color{red}#1}}   % highlights command
+
+\graphicspath{{./}{../images/}}
+
+%\usenotestyle{Corner}
+%\usenotestyle{VerticalShading}
+\usenotestyle{Sticky}
+\begin{document}
+\maketitle[width=\linewidth,titletotopverticalspace=0pt]
+
+% Here it starts
+
+\begin{columns} % Blocks will be placed into columns
+    
+    \column{.55}
+    \block[roundedcorners=40]{Context: Cognitive-Diagnostic Adaptive Testing}{
+        \begin{itemize}
+            \item \textbf{Adaptive testing} $\Rightarrow$ personalized assessment
+            \item \textbf{Formative testing} $\Rightarrow$ need of feedback
+            \item \textbf{Large database of skills} $\Rightarrow$ standard methods do not apply
+            \item \textbf{Cold-start} $\Rightarrow$ no user data available yet
+        \end{itemize}
+
+        %\includegraphics[width=\linewidth]{figures/cat.png}
+
+        \vspace{1cm}
+        \innerblock[]{Item Response Theory}{
+            \[ \Pr(\textnormal{student}_{\textnormal{level}=\theta} \textnormal{ \textsl{VS} question}_{\textnormal{difficulty}=d} = correct) \triangleq \frac1{1 + e^{-(\theta - d)}} \]
+            \hfill $\Rightarrow$ \textnormal{ no feedback}
+        }
+        \vspace{1cm}
+        \innerblock[]{DINA, Attribute Hierarchy Model}{
+            \[ \Pr(\textnormal{student}_{\textnormal{KC}^\textnormal{*}} \textnormal{ \textsl{VS} question}_{\begin{subarray}{l}\textnormal{KC}\\\textnormal{slip}=s\\\textnormal{guess}=g\end{subarray}} = correct) \triangleq \left\{\begin{array}{cl}
+1 - s & \textnormal{if all question}_\textnormal{KC} \textnormal{ mastered by student}_\textnormal{KC}\\
+g & \textnormal{otherwise.}
+\end{array}\right. \]
+            \hfill $\Rightarrow$ \textnormal{ not scalable}
+        }
+        \small \textsuperscript{*} KC = knowledge components
+    }
+
+    \block{Can we do better?}{
+        \innerblock[]{Our Heuristic Method}{
+            \[ score(j) = \Pr(correct) \cdot N_{\texttt{would be acquired}} + \Pr(incorrect) \cdot N_{\texttt{would not be acquired}} \]
+        }
+        \begin{itemize}
+            \item \textbf{Rough estimate of the number of nodes marked} in the dependency graph at each step
+            \item \textbf{Greedy selection}
+            \item Later in the test, we can \textbf{switch to a more precise diagnostic model}
+            \item \textbf{Add edges to dependency graph} based on usage (Deep Knowledge Tracing, NIPS 2015)
+        \end{itemize}
+    }
+
+    \block{Impact}{
+        \begin{itemize}
+            \item \textbf{800 exercises} based on evidence-centered design
+            \item \textbf{3.5 million} high school students (grade 8 to 12)
+            \item \textbf{1.25 million} higher-education students
+            \item The platform is on GitHub (license AGPLv3)
+        \end{itemize}
+        \includegraphics[width=\linewidth]{figures/domains.png}
+    }
+
+    \column{.45}
+    \block{Computerized Adaptive Testing (CAT)}{
+        The next question is chosen based on the answer history.
+
+        \vspace{1cm}
+        \includegraphics[width=\linewidth]{figures/adaptive.pdf}
+    }
+
+    \block{Domain: Dependency Graph}{
+        \begin{itemize}
+            \item Each validation triggers the validation of parents.
+            \item Each non-validation triggers the non-validation of children.
+        \end{itemize}
+        \includegraphics[width=\linewidth]{figures/prerequis.png}
+    }
+
+    \block{Example of CAT tree}{
+        \includegraphics[width=\linewidth]{figures/cat.png}
+    }
+
+\end{columns}
+
+\block{Application: Certifying the Digital Competencies of French citizens}{
+    \includegraphics[width=\linewidth]{figures/pix.png}
+}
+
+\end{document}
+
+\endinput
