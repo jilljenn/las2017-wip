@@ -1,5 +1,6 @@
 %\documentclass{tikzposter}
 \documentclass[25pt, a0paper,
+%landscape,
 margin=0mm, innermargin=15mm, blockverticalspace=15mm, colspace=15mm, subcolspace=8mm]{tikzposter}
 \usepackage{trace}
 \usepackage{amsmath}
@@ -28,11 +29,11 @@ margin=0mm, innermargin=15mm, blockverticalspace=15mm, colspace=15mm, subcolspac
 % \setmathfont[range=\mathit/{latin,Latin}, Scale=MatchUppercase]{Futura Std Book Oblique}
 
 % Optima
-% \setmainfont[Renderer=Basic,Microtype,Ligatures=TeX,
-% BoldFont=*Bold%
-% ,BoldItalicFont=*BoldItalic%
-% ,ItalicFont=*Italic%
-% ]{OptimaLT Std}
+\setmainfont[Renderer=Basic,Microtype,Ligatures=TeX,
+BoldFont=*Bold%
+,BoldItalicFont=*BoldItalic%
+,ItalicFont=*Italic%
+]{OptimaLT Std}
 % \setsansfont[Scale=MatchLowercase
 % %,Mapping=tex-text
 % ,Ligatures=TeX
@@ -41,11 +42,11 @@ margin=0mm, innermargin=15mm, blockverticalspace=15mm, colspace=15mm, subcolspac
 % ,ItalicFont=*Italic%
 %  ]{OptimaLT Std DemiBold}
 
-% \setmathfont[range=\mathit/{latin,Latin},
-% Scale=MatchUppercase]{OptimaLT Std DemiBold Italic}
+\setmathfont[range=\mathit/{latin,Latin},
+Scale=MatchUppercase]{OptimaLT Std DemiBold Italic}
 
 % tt
-% \setmonofont[Scale=MatchLowercase]{Consolas}
+\setmonofont[Scale=MatchLowercase]{Consolas}
 
 
 %\setmainfont[Renderer=Basic,Microtype,Ligatures=TeX]{Futura Std}
@@ -62,11 +63,11 @@ margin=0mm, innermargin=15mm, blockverticalspace=15mm, colspace=15mm, subcolspac
 \usepackage{hyperref}
 \newcommand{\email}[1]{\href{mailto:#1}{\textsf{#1}}}
 %\usepackage{url}
-\title{\parbox{\linewidth}{\centering A Heuristic Method for Large-Scale Cognitive-Diagnostic Computerized Adaptive Testing}}
+\title{\parbox{\linewidth}{\centering \textbf{A Heuristic Method for Large-Scale Cognitive-Diagnostic Computerized Adaptive Testing}}}
 %\titlegraphic{\includegraphics[width=0.7\textwidth]{Logo_Supelec}}
 \author{\centering
   \begin{tabular}{ccccc}
-    Jill-Jênn Vie & Fabrice Popineau & Françoise Tort & Benjamin Marteau & Nathalie Denos \\
+    \textbf{Jill-Jênn Vie} & \textbf{Fabrice Popineau} & \textbf{Françoise Tort} & \textbf{Benjamin Marteau} & \textbf{Nathalie Denos} \\
     RIKEN Center for Advanced & Laboratoire de recherche & ENS Paris-Saclay & French Ministry of Education & Université Grenoble-Alpes\\
 Intelligence Project (AIP) & en informatique (LRI) & Cachan, France & Paris, France & Grenoble, France \\
 Tokyo, Japan & Orsay, France &  \texttt{francoise.tort} & \texttt{benjamin.marteau} & \texttt{nathalie.denos} \\
@@ -246,3 +247,8 @@ g & \textnormal{otherwise.}
 \end{document}
 
 \endinput
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
