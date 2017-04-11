@@ -1,7 +1,7 @@
 %\documentclass{tikzposter}
 \documentclass[25pt, a0paper,
 %landscape,
-margin=0mm, innermargin=15mm, blockverticalspace=15mm, colspace=15mm, subcolspace=8mm]{tikzposter}
+margin=0mm, innermargin=15mm, blockverticalspace=5mm, colspace=15mm, subcolspace=6mm]{tikzposter}
 \usepackage{trace}
 \usepackage{amsmath}
 \usepackage{mathtools}
@@ -63,7 +63,7 @@ Scale=MatchUppercase]{OptimaLT Std DemiBold Italic}
 \usepackage{hyperref}
 \newcommand{\email}[1]{\href{mailto:#1}{\textsf{#1}}}
 %\usepackage{url}
-\title{\parbox{\linewidth}{\centering \textbf{A Heuristic Method for Large-Scale Cognitive-Diagnostic Computerized Adaptive Testing}}}
+\title{\parbox{\linewidth}{\begin{center}\textbf{A Heuristic Method for Large-Scale Cognitive-Diagnostic}\\ \textbf{Computerized Adaptive Testing}\end{center}}}
 %\titlegraphic{\includegraphics[width=0.7\textwidth]{Logo_Supelec}}
 \author{\centering
   \begin{tabular}{ccccc}
@@ -87,12 +87,12 @@ Tokyo, Japan & Orsay, France &  \texttt{francoise.tort} & \texttt{benjamin.marte
 \usecolorpalette{BrownBlueOrange}
 \makeatletter
 \renewcommand\TP@maketitle{%
-  \begin{minipage}{0.06\linewidth}
-    \centering
-    \includegraphics[width=0.8\textwidth]{figures/logo-cs.png}\\[1em]
-    \includegraphics[width=0.8\textwidth]{figures/logo-men.pdf}
-  \end{minipage}
-   \begin{minipage}{0.87\linewidth}
+  % \begin{minipage}{0.06\linewidth}
+  %   \centering
+  %   \includegraphics[width=0.8\textwidth]{figures/logo-cs.png}\\[1em]
+  %   \includegraphics[width=0.8\textwidth]{figures/logo-men.pdf}
+  % \end{minipage}
+   \begin{minipage}{0.98\linewidth}
         \centering
         \color{titlefgcolor}
         {\bfseries \Huge \sc \@title \par}
@@ -100,12 +100,12 @@ Tokyo, Japan & Orsay, France &  \texttt{francoise.tort} & \texttt{benjamin.marte
         {\Large
           \@author \par}
     \end{minipage}%
-    \hfill
-    \begin{minipage}{0.06\linewidth}
-      \centering
-    \includegraphics[width=0.8\textwidth]{figures/logo-ensps.jpg}\\[1em]
-    \includegraphics[width=0.8\textwidth]{figures/logo-lri.pdf}
-    \end{minipage}
+    % \hfill
+    % \begin{minipage}{0.06\linewidth}
+    %   \centering
+    % \includegraphics[width=0.8\textwidth]{figures/logo-ensps.jpg}\\[1em]
+    % \includegraphics[width=0.8\textwidth]{figures/logo-lri.pdf}
+    % \end{minipage}
 }
 \makeatother
 
@@ -223,7 +223,7 @@ g & \textnormal{otherwise.}
         The next question is chosen based on the answer history.
 
         \vspace{1cm}
-        \includegraphics[width=\linewidth]{figures/adaptive.pdf}
+        \centerline{\includegraphics[width=0.6\linewidth]{figures/adaptive.pdf}}
     }
 
     \block{Domain: Dependency Graph}{
@@ -241,8 +241,25 @@ g & \textnormal{otherwise.}
 \end{columns}
 
 \block{Application: Certifying the Digital Competencies of French citizens}{
-    \includegraphics[width=\linewidth]{figures/pix.png}
+    \begin{minipage}[b]{0.8\linewidth}
+      {\includegraphics[width=0.5\linewidth]{figures/pix.png}}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.08\linewidth}
+      \centering
+    \includegraphics[width=0.8\textwidth]{figures/logo-ensps.jpg}\\[1em]
+    \includegraphics[width=0.8\textwidth]{figures/logo-lri.pdf}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.08\linewidth}
+      \centering
+      \includegraphics[width=0.8\textwidth]{figures/logo-cs.png}\\[1em]
+      \includegraphics[width=0.8\textwidth]{figures/logo-men.pdf}
+    \end{minipage}
+
 }
+
+
 
 \end{document}
 
