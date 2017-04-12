@@ -9,6 +9,7 @@ margin=0mm, innermargin=15mm, blockverticalspace=5mm, colspace=15mm, subcolspace
 \usepackage[vargreek-shape=unicode]{unicode-math}
 %\RequirePackage{lualatex-math}
 \newfontfeature{Microtype}{protrusion=default;expansion=default;}
+\tikzposterlatexaffectionproofoff
 
 % Maths
 \setmathfont{XITS Math}
@@ -206,11 +207,12 @@ g_j & \textnormal{otherwise.}
 
     \block{Can we do better?}{
         \innerblock[]{Our Heuristic Method}{
+            \raggedright
             Knowledge components $1, \ldots, K$ contain a \textbf{tag} and a \textbf{difficulty} level (ex. \texttt{@url4})\\
-            \hfill KCs are linked in a \textbf{dependency graph}\\
-            Students $i \in I$ have unknown \textbf{level} $\theta_i$ and knowledge $\in \{0, 1\}^K$\\
+            \raggedleft KCs are linked in a \textbf{dependency graph}\\
+            \raggedright Students $i \in I$ have unknown \textbf{level} $\theta_i$ and knowledge $\in \{0, 1\}^K$\\
             Questions $j \in J$ have a unique main requirement $\in \{1, \ldots, K\}$\\
-            \hfill $\Pr(\textsf{correct}_{ij})$ is same as in Item Response Theory
+            \raggedleft $\Pr(\textsf{correct}_{ij})$ is same as in Item Response Theory
             \[ score(j) = \Pr(\textsf{correct}_{ij}) \cdot N_{\textsf{acquired nodes if correct}} + \Pr(\textsf{incorrect}_{ij}) \cdot N_{\textsf{non-acquired nodes if incorrect}} \]
         }
         \begin{itemize}
@@ -235,7 +237,7 @@ g_j & \textnormal{otherwise.}
     % }
 
     \column{.45}
-    \block{Computerized Adaptive Testing (CAT)}{
+    \block{Output: Computerized Adaptive Testing (CAT)}{
         The next question is chosen based on the answer history.
 
         \vspace{1cm}
@@ -245,24 +247,28 @@ g_j & \textnormal{otherwise.}
     \block{Input: Dependency Graph over DIGCOMP 2.0}{
         % \includegraphics[width=\linewidth]{figures/domains.png}
         5 domains of the DIGCOMP referential for numerical competencies
-        \begin{itemize}
-            \item Information \& Data Literacy
-            \item Communication \& Collaboration
-            \item Digital Content Creation
-            \item Safety
-            \item Problem Solving
-        \end{itemize}
+        % \begin{itemize}
+        %     \item Information \& Data Literacy
+        %     \item Communication \& Collaboration
+        %     \item Digital Content Creation
+        %     \item Safety
+        %     \item Problem Solving
+        % \end{itemize}
+        \centerline{\includegraphics{figures/digcomp.png}}
+        
         Tags are related to these domains.\\
         \includegraphics[width=\linewidth]{figures/tags.png}
-        \begin{itemize}
-            \item Each validation triggers the validation of parents.
-            \item Each non-validation triggers the non-validation of children.
-        \end{itemize}
+        % \begin{itemize}
+        %     \item Each validation triggers the validation of parents.
+        %     \item Each non-validation triggers the non-validation of children.
+        % \end{itemize}
+        \includegraphics[width=\linewidth]{figures/example2.pdf}
+        \includegraphics[width=\linewidth]{figures/example2.pdf}
     }
 
-    \block{Output: Example of CAT tree}{
-        \includegraphics[width=\linewidth]{figures/cat.png}
-    }
+    % \block{Output: Example of CAT tree}{
+    %     \includegraphics[width=\linewidth]{figures/cat.png}
+    % }
 
 \end{columns}
 
@@ -277,7 +283,7 @@ g_j & \textnormal{otherwise.}
         \end{itemize}
     \end{minipage}
     \begin{minipage}[b]{0.4\linewidth}
-      \raisebox{-2cm}{\includegraphics[width=\linewidth]{figures/pix.png}}
+      \raisebox{-2cm}{\includegraphics[width=\linewidth]{figures/cat.png}}
     \end{minipage}
     \hfill
     \begin{minipage}[b]{0.08\linewidth}
@@ -293,8 +299,6 @@ g_j & \textnormal{otherwise.}
     \end{minipage}
 
 }
-
-
 
 \end{document}
 

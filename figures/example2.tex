@@ -18,10 +18,10 @@
     every edge/.style={draw,->,>=stealth},
     every pin edge/.style={<-,red!70!black,shorten <=1mm}]
 \node[draw] (web1) at (1,0) {@web1};
-\node[draw,label=above:{\small $p(\correct)=0.5$\\\small $\correct \Rightarrow 2$ / $\incorrect \Rightarrow 2$\\[2mm]\normalsize $\mathbf{score=2}$}] (web2) at (2,0) {@web2};
+\node[draw] (web2) at (2,0) {@web2};
 \node[draw] (web3) at (3,0) {@web3};
 \node[draw] (url2) at (2,-1) {@url2}; 
-\node[draw,very thick,pixblue,label={[pixblue]below:$\mathbf{score=2.73}$\\[2mm]\small $p(\correct) = 0.27$\\\small $\correct \Rightarrow 2$ / $\incorrect \Rightarrow 3$},pin={[red!70!black]45:best question to ask}] (url3) at (3,-1) {@url3};
+\node[draw] (url3) at (3,-1) {@url3};
 \node[draw] (url4) at (4,-1) {@url4};
 \node[draw] (url5) at (5,-1) {@url5};
 \draw (web1) edge (web2);
