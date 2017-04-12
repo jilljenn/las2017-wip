@@ -174,43 +174,47 @@ Tokyo, Japan & Orsay, France &  \texttt{francoise.tort} & \texttt{benjamin.marte
     
     \column{.55}
     \block[roundedcorners=40]{Context: Cognitive-Diagnostic Computerized Adaptive Testing}{
+        \textbf{Input:} a dependency graph between \textbf{knowledge components} (KC)\\
+        \textbf{Output:} an adaptive test (CAT tree) with feedback
         \begin{itemize}
             \item \textbf{Adaptive testing} $\Rightarrow$ personalized assessment
-            \item \textbf{Formative testing} $\Rightarrow$ need of feedback
-            \item \textbf{Large database of skills} $\Rightarrow$ standard methods do not apply
+            \item \textbf{Formative testing} $\Rightarrow$ need of feedback (using the KCs)
+            \item \textbf{Many knowledge components} $\Rightarrow$ standard methods do not apply
             \item \textbf{Cold-start} $\Rightarrow$ no user data available yet
         \end{itemize}
 
-        %\includegraphics[width=\linewidth]{figures/cat.png}
-
         \vspace{1cm}
         \innerblock[]{Item Response Theory}{
-            \[ \Pr(\textsf{student}_{\textnormal{level}=\theta} \textsf{ \textnormal{VS} question}_{\textnormal{difficulty}=d} = correct) \triangleq \frac1{1 + e^{-(\theta - d)}} \]
-            \hfill $\Rightarrow$ \textnormal{ \textbf{no feedback}}
+            Students $i \in I$ have \textbf{unknown} level $\theta_i$\\
+            Questions $j \in J$ have difficulty $d_j$ (potentially calibrated on data)
+            \[ \Pr(\textsf{correct}_{ij}) \triangleq \Pr(\textsf{student}_i \textnormal{ answers correctly } \textsf{question}_j) \triangleq \frac1{1 + e^{-(\theta_i - d_j)}} \]
+            \hfill $\Rightarrow$ \textnormal{ \textbf{$\theta$ is easily estimated, but no feedback}}
         }
         \vspace{1cm}
         \innerblock[]{DINA \& Attribute Hierarchy Model}{
-            \[ \Pr(\textsf{student}_{\textnormal{KC}^\textnormal{*}} \textnormal{ \textnormal{VS} \textsf{question}}_{\begin{subarray}{l}\textnormal{KC}\\\textnormal{slip}=s\\\textnormal{guess}=g\end{subarray}} = correct) \triangleq \left\{\begin{array}{cl}
-1 - s & \textnormal{if \textsf{student}}_\textnormal{KC} \textnormal{masters every \textsf{question}}_\textnormal{KC}\\
-g & \textnormal{otherwise.}
+            Knowledge components $1, \ldots, K$\\
+            Students $i \in I$ have \textbf{unknown} knowledge $\in \{0, 1\}^K$\\
+            Questions $j \in J$ have requirements $\in \{0, 1\}^K$ (q-matrix), slip $s_j$ and guess $g_j$ parameters
+            \[ \Pr(\textsf{correct}_{ij}) \triangleq \left\{\begin{array}{cl}
+1 - s_j & \textnormal{if } \textsf{student}_i \textnormal{ masters the requirements of } \textsf{question}_j\\
+g_j & \textnormal{otherwise.}
 \end{array}\right. \]
-            \hfill $\Rightarrow$ \textnormal{ \textbf{not scalable}}
+            \hfill $\Rightarrow$ \textnormal{ \textbf{can be used in cold-start, but not scalable when $K$ grows ($\geq$ 50)}}
         }
-        \small \textsuperscript{*} KC = knowledge components
     }
 
     \block{Can we do better?}{
-        \begin{itemize}
-            \item Each exercise has a \textbf{tag} containing a \textbf{difficulty} level.
-            \item Tags are linked in a \textbf{dependency graph}.
-            \item User is modeled by a level ($\simeq$ Item Response Theory)
-        \end{itemize}
         \innerblock[]{Our Heuristic Method}{
-            \[ score(j) = \Pr(correct) \cdot N_{\texttt{would be acquired}} + \Pr(incorrect) \cdot N_{\texttt{would not be acquired}} \]
+            Knowledge components $1, \ldots, K$ contain a \textbf{tag} and a \textbf{difficulty} level (ex. \texttt{@url4})\\
+            \hfill KCs are linked in a \textbf{dependency graph}\\
+            Students $i \in I$ have unknown \textbf{level} $\theta_i$ and knowledge $\in \{0, 1\}^K$\\
+            Questions $j \in J$ have a unique main requirement $\in \{1, \ldots, K\}$\\
+            \hfill $\Pr(\textsf{correct}_{ij})$ is same as in Item Response Theory
+            \[ score(j) = \Pr(\textsf{correct}_{ij}) \cdot N_{\textsf{acquired nodes if correct}} + \Pr(\textsf{incorrect}_{ij}) \cdot N_{\textsf{non-acquired nodes if incorrect}} \]
         }
         \begin{itemize}
             \item \textbf{Rough estimate of the number of nodes marked} in the dependency graph at each step
-            \item \textbf{Greedy selection}
+            \item \textbf{Greedy selection} to build the tree
             \item Later in the test, we can \textbf{switch to a more precise diagnostic model}
             \item \textbf{Add edges to dependency graph} based on usage (Deep Knowledge Tracing, NIPS 2015)
         \end{itemize}
