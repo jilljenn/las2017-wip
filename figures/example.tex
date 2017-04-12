@@ -1,0 +1,33 @@
+\RequirePackage{luatex85}
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage{fontspec}
+\usepackage[vargreek-shape=unicode]{unicode-math}
+\setromanfont{Optima LT Std}
+\setmathfont{XITS Math}
+\definecolor{pixblue}{RGB}{53,81,250}
+
+\def\correct{\textsf{correct}}
+\def\incorrect{\textsf{incorrect}}
+
+\begin{document}
+\begin{tikzpicture}[
+    xscale=2.1,
+    pin distance=1cm,
+    every node/.style={rounded corners=1mm,minimum width=1.3cm,align=center},
+    every edge/.style={draw,->,>=stealth},
+    every pin edge/.style={<-,red!70!black,shorten <=1mm}]
+\node[draw] (web1) at (1,0) {@web1};
+\node[draw,label=above:{\small $p(\correct)=0.5$\\\small $\correct \Rightarrow 2$ / $\incorrect \Rightarrow 2$\\[2mm]\normalsize $\mathbf{score=2}$}] (web2) at (2,0) {@web2};
+\node[draw] (web3) at (3,0) {@web3};
+\node[draw] (url2) at (2,-1) {@url2};
+\node[draw,very thick,pixblue,label={[pixblue]below:$\mathbf{score=2.73}$\\[2mm]\small $p(\correct) = 0.27$\\\small $\correct \Rightarrow 2$ / $\incorrect \Rightarrow 3$},pin={[red!70!black]45:best question to ask}] (url3) at (3,-1) {@url3};
+\node[draw] (url4) at (4,-1) {@url4};
+\node[draw] (url5) at (5,-1) {@url5};
+\draw (web1) edge (web2);
+\draw (web2) edge (web3);
+\draw (url2) edge (url3);
+\draw (url3) edge (url4);
+\draw (url4) edge (url5);
+\end{tikzpicture}
+\end{document}

@@ -167,10 +167,13 @@ Tokyo, Japan & Orsay, France &  \texttt{francoise.tort} & \texttt{benjamin.marte
 
 % Here it starts
 
+\definecolor{pixblue}{RGB}{53,81,250}
+\colorlet{innerblocktitlebgcolor}{pixblue}
+
 \begin{columns} % Blocks will be placed into columns
     
     \column{.55}
-    \block[roundedcorners=40]{Context: Cognitive-Diagnostic Adaptive Testing}{
+    \block[roundedcorners=40]{Context: Cognitive-Diagnostic Computerized Adaptive Testing}{
         \begin{itemize}
             \item \textbf{Adaptive testing} $\Rightarrow$ personalized assessment
             \item \textbf{Formative testing} $\Rightarrow$ need of feedback
@@ -182,21 +185,26 @@ Tokyo, Japan & Orsay, France &  \texttt{francoise.tort} & \texttt{benjamin.marte
 
         \vspace{1cm}
         \innerblock[]{Item Response Theory}{
-            \[ \Pr(\textnormal{student}_{\textnormal{level}=\theta} \textnormal{ \textsl{VS} question}_{\textnormal{difficulty}=d} = correct) \triangleq \frac1{1 + e^{-(\theta - d)}} \]
-            \hfill $\Rightarrow$ \textnormal{ no feedback}
+            \[ \Pr(\textsf{student}_{\textnormal{level}=\theta} \textsf{ \textnormal{VS} question}_{\textnormal{difficulty}=d} = correct) \triangleq \frac1{1 + e^{-(\theta - d)}} \]
+            \hfill $\Rightarrow$ \textnormal{ \textbf{no feedback}}
         }
         \vspace{1cm}
-        \innerblock[]{DINA, Attribute Hierarchy Model}{
-            \[ \Pr(\textnormal{student}_{\textnormal{KC}^\textnormal{*}} \textnormal{ \textsl{VS} question}_{\begin{subarray}{l}\textnormal{KC}\\\textnormal{slip}=s\\\textnormal{guess}=g\end{subarray}} = correct) \triangleq \left\{\begin{array}{cl}
-1 - s & \textnormal{if all question}_\textnormal{KC} \textnormal{ mastered by student}_\textnormal{KC}\\
+        \innerblock[]{DINA \& Attribute Hierarchy Model}{
+            \[ \Pr(\textsf{student}_{\textnormal{KC}^\textnormal{*}} \textnormal{ \textnormal{VS} \textsf{question}}_{\begin{subarray}{l}\textnormal{KC}\\\textnormal{slip}=s\\\textnormal{guess}=g\end{subarray}} = correct) \triangleq \left\{\begin{array}{cl}
+1 - s & \textnormal{if \textsf{student}}_\textnormal{KC} \textnormal{masters every \textsf{question}}_\textnormal{KC}\\
 g & \textnormal{otherwise.}
 \end{array}\right. \]
-            \hfill $\Rightarrow$ \textnormal{ not scalable}
+            \hfill $\Rightarrow$ \textnormal{ \textbf{not scalable}}
         }
         \small \textsuperscript{*} KC = knowledge components
     }
 
     \block{Can we do better?}{
+        \begin{itemize}
+            \item Each exercise has a \textbf{tag} containing a \textbf{difficulty} level.
+            \item Tags are linked in a \textbf{dependency graph}.
+            \item User is modeled by a level ($\simeq$ Item Response Theory)
+        \end{itemize}
         \innerblock[]{Our Heuristic Method}{
             \[ score(j) = \Pr(correct) \cdot N_{\texttt{would be acquired}} + \Pr(incorrect) \cdot N_{\texttt{would not be acquired}} \]
         }
@@ -208,15 +216,18 @@ g & \textnormal{otherwise.}
         \end{itemize}
     }
 
-    \block{Impact}{
-        \begin{itemize}
-            \item \textbf{800 exercises} based on evidence-centered design
-            \item \textbf{3.5 million} high school students (grade 8 to 12)
-            \item \textbf{1.25 million} higher-education students
-            \item The platform is on GitHub (license AGPLv3)
-        \end{itemize}
-        \includegraphics[width=\linewidth]{figures/domains.png}
+    \block{Example}{
+        \centerline{\includegraphics[width=0.8\linewidth]{figures/example.pdf}}
     }
+
+    % \block{Impact}{
+    %     \begin{itemize}
+    %         \item \textbf{800 exercises} based on evidence-centered design
+    %         \item \textbf{3.5 million} high school students (grade 8 to 12)
+    %         \item \textbf{1.25 million} higher-education students
+    %         \item The platform is on GitHub (license AGPLv3)
+    %     \end{itemize}
+    % }
 
     \column{.45}
     \block{Computerized Adaptive Testing (CAT)}{
@@ -226,23 +237,42 @@ g & \textnormal{otherwise.}
         \centerline{\includegraphics[width=0.6\linewidth]{figures/adaptive.pdf}}
     }
 
-    \block{Domain: Dependency Graph}{
+    \block{Input: Dependency Graph over DIGCOMP 2.0}{
+        % \includegraphics[width=\linewidth]{figures/domains.png}
+        5 domains of the DIGCOMP referential for numerical competencies
+        \begin{itemize}
+            \item Information \& Data Literacy
+            \item Communication \& Collaboration
+            \item Digital Content Creation
+            \item Safety
+            \item Problem Solving
+        \end{itemize}
+        Tags are related to these domains.\\
+        \includegraphics[width=\linewidth]{figures/tags.png}
         \begin{itemize}
             \item Each validation triggers the validation of parents.
             \item Each non-validation triggers the non-validation of children.
         \end{itemize}
-        \includegraphics[width=\linewidth]{figures/prerequis.png}
     }
 
-    \block{Example of CAT tree}{
+    \block{Output: Example of CAT tree}{
         \includegraphics[width=\linewidth]{figures/cat.png}
     }
 
 \end{columns}
 
 \block{Application: Certifying the Digital Competencies of French citizens}{
-    \begin{minipage}[b]{0.8\linewidth}
-      {\includegraphics[width=0.5\linewidth]{figures/pix.png}}
+    \begin{minipage}[b]{0.4\linewidth}
+        \begin{itemize}
+            \item \textbf{800 skeletons of exercises} based on evidence-centered design
+            \item \textbf{800 knowledge components}
+            \item \textbf{3.5 million} high school students (grade 8 to 12)
+            \item \textbf{1.25 million} higher-education students
+            \item The platform is on GitHub (license AGPLv3)
+        \end{itemize}
+    \end{minipage}
+    \begin{minipage}[b]{0.4\linewidth}
+      \raisebox{-2cm}{\includegraphics[width=\linewidth]{figures/pix.png}}
     \end{minipage}
     \hfill
     \begin{minipage}[b]{0.08\linewidth}
