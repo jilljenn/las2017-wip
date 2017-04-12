@@ -10,6 +10,8 @@
 \def\correct{\textsf{correct}}
 \def\incorrect{\textsf{incorrect}}
 
+\usetikzlibrary{calc}
+
 \begin{document}
 \begin{tikzpicture}[
     xscale=2.1,
@@ -24,10 +26,38 @@
 \node[draw,very thick,pixblue,label={[pixblue]below:$\mathbf{score=2.73}$\\[2mm]\small $p(\correct) = 0.27$\\\small $\correct \Rightarrow 2$ / $\incorrect \Rightarrow 3$},pin={[red!70!black]45:best question to ask}] (url3) at (3,-1) {@url3};
 \node[draw] (url4) at (4,-1) {@url4};
 \node[draw] (url5) at (5,-1) {@url5};
+
+\node[draw] (url2p) at (5.5,+1) {@url2}; 
+\node[draw] (url3p) at (6.5,+1) {@url3}; 
+\node[draw] (url4p) at (7.5,+1) {@url4};
+\node[draw] (url5p) at (8.5,+1) {@url5};
+
+\node[draw] (url2n) at (5.5,-2.5) {@url2}; 
+\node[draw] (url3n) at (6.5,-2.5) {@url3}; 
+\node[draw] (url4n) at (7.5,-2.5) {@url4};
+\node[draw] (url5n) at (8.5,-2.5) {@url5};
+
+
+
 \draw (web1) edge (web2);
 \draw (web2) edge (web3);
 \draw (url2) edge (url3);
 \draw (url3) edge (url4);
 \draw (url4) edge (url5);
+
+\draw (url2p) edge (url3p);
+\draw (url3p) edge (url4p);
+\draw (url4p) edge (url5p);
+
+\draw (url2n) edge (url3n);
+\draw (url3n) edge (url4n);
+\draw (url4n) edge (url5n);
+
+\draw [ thick, to path={-| (\tikztotarget)}] ($(url5.east) + (0.2,0.1)$) edge ($(url3p.south) + (0, -0.1)$);
+\draw [ thick, to path={-| (\tikztotarget)}] ($(url5.east) + (0.2,-0.1)$) edge ($(url3n.north) + (0, 0.1)$);
+
+\node[draw=none, below of=url4p] {positive answer};
+\node[draw=none, above of=url4n] {negative answer};
+
 \end{tikzpicture}
 \end{document}
