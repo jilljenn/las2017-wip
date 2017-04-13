@@ -203,7 +203,7 @@ Tokyo, Japan & Orsay, France &  \texttt{francoise.tort} & \texttt{benjamin.marte
             Students $i \in I$ have \textbf{unknown} knowledge $\in \{0, 1\}^K$\\
             Questions $j \in J$ have requirements $\in \{0, 1\}^K$ (q-matrix), slip $s_j$ and guess $g_j$ parameters
             \[ \Pr(\textsf{correct}_{ij}) \triangleq \left\{\begin{array}{cl}
-1 - s_j & \textnormal{if } \textsf{student}_i \textnormal{ masters the requirements of } \textsf{question}_j\\
+1 - s_j & \textnormal{if } \textsf{student}_i \textnormal{ masters every requirement of } \textsf{question}_j\\
 g_j & \textnormal{otherwise.}
 \end{array}\right. \]
             \hfill $\Rightarrow$ \textnormal{ \textbf{can be used in cold-start, but not scalable when $K$ grows ($\geq$ 50)}}
@@ -218,7 +218,7 @@ g_j & \textnormal{otherwise.}
             \end{sidebox}}\\
             Students $i \in I$ have \textbf{unknown} level $\theta_i$ and knowledge $\in \{0, 1\}^K$\\
             Questions $j \in J$ have a unique main requirement $\in \{1, \ldots, K\}$\\
-            \[ \Pr(\textsf{correct}_{ij}) \textnormal{ is same as in Item Response Theory} \]
+            \[ \Pr(\textsf{correct}_{ij}) \textnormal{ is the same as in Item Response Theory} \]
             \[ score(j) = \Pr(\textsf{correct}_{ij}) \cdot N_{\textsf{acquired nodes if correct}} + \Pr(\textsf{incorrect}_{ij}) \cdot N_{\textsf{non-acquired nodes if incorrect}} \]
         }
         \begin{itemize}
@@ -244,6 +244,7 @@ g_j & \textnormal{otherwise.}
         \includegraphics[width=\linewidth]{figures/graph}
 
         Based on DIGCOMP 2.0, the European Digital Competence Framework
+        
         \centerline{
             \includegraphics[width=0.25\textwidth]{figures/digcomp.pdf}
         }
