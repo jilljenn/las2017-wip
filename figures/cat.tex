@@ -4,19 +4,19 @@
 \usepackage[vargreek-shape=unicode]{unicode-math}
 \setromanfont{Optima LT Std}
 \setmathfont{XITS Math}
-\newcommand\estimate[1]{\color{gray} $\hat\theta = #1$}
+\newcommand\tagestimate[2]{\parbox{2.5cm}{\centering #1 ?\\\footnotesize \color{gray} $\hat\theta = #2$}}
 
 \begin{document}
-\begin{tikzpicture}[scale=2,>=stealth]
-\node[draw,rounded corners=1mm] (x) at (1.5,2) {\parbox{3cm}{\centering @utiliserserv3 ?\\\estimate3}};
-\node[draw,rounded corners=1mm] (l) at (1,1) {@moteur2 ? \estimate{1.5}};
-\node[draw,rounded corners=1mm] (r) at (2,1) {$Q_{12}$};
-\node[draw,rounded corners=1mm] (ll) at (0,0) {$Q_1$};
-\node[draw,rounded corners=1mm] (lr) at (1,0) {$Q_4$};
-\node[draw,rounded corners=1mm] (rl) at (2,0) {$Q_7$};
-\node[draw,rounded corners=1mm] (rr) at (3,0) {$Q_{14}$};
-\draw[->,thick,dashed] (x) edge node[sloped,above] {incorrect} (l);
-\draw[->,thick] (x) edge node[sloped,above] {correct} (r);
+\begin{tikzpicture}[xscale=3,yscale=2,>=stealth]
+\node[draw,rounded corners=1mm] (x) at (1.5,2) {\tagestimate{@utiliserserv3}{3}};
+\node[draw,rounded corners=1mm] (l) at (1,1) {\tagestimate{@moteur2}{1.5}};
+\node[draw,rounded corners=1mm] (r) at (2,1) {\tagestimate{@moteur4}{5}};
+\node[draw,rounded corners=1mm] (ll) at (0,0) {\tagestimate{@publi2}{0.8}};
+\node[draw,rounded corners=1mm] (lr) at (1,0) {\tagestimate{@publi3}{2.5}};
+\node[draw,rounded corners=1mm] (rl) at (2,0) {\tagestimate{@publi3}{3.5}};
+\node[draw,rounded corners=1mm] (rr) at (3,0) {\tagestimate{@publi4}{5.7}};
+\draw[->,thick,dashed] (x) edge (l);
+\draw[->,thick] (x) edge (r);
 \draw[->,thick,dashed] (l) edge (ll);
 \draw[->,thick] (l) edge (lr);
 \draw[->,thick,dashed] (r) edge (rl);

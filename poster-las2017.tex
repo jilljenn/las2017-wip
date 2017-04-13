@@ -187,7 +187,7 @@ Tokyo, Japan & Orsay, France &  \texttt{francoise.tort} & \texttt{benjamin.marte
             \item \textbf{Adaptive testing} $\Rightarrow$ personalized assessment
             \item \textbf{Formative testing} $\Rightarrow$ need of feedback (using the KCs)
             \item \textbf{Many knowledge components} $\Rightarrow$ standard methods do not apply
-            \item \textbf{Cold-start} $\Rightarrow$ no user data available yet
+            \item \textbf{Cold-start} $\Rightarrow$ no user data available at the time
         \end{itemize}
 
         \vspace{1cm}
@@ -229,30 +229,17 @@ g_j & \textnormal{otherwise.}
         \end{itemize}
     }
 
-    % \block{Example}{
-    %     \centerline{\includegraphics[width=0.8\linewidth]{figures/example.pdf}}
-    % }
-
-    % \block{Impact}{
-    %     \begin{itemize}
-    %         \item \textbf{800 exercises} based on evidence-centered design
-    %         \item \textbf{3.5 million} high school students (grade 8 to 12)
-    %         \item \textbf{1.25 million} higher-education students
-    %         \item The platform is on GitHub (license AGPLv3)
-    %     \end{itemize}
-    % }
-
     \column{.45}
-    \block{Output: Computerized Adaptive Testing (CAT)}{
-        The next question is chosen based on the answer history.
+    \block{Computerized Adaptive Testing (CAT)}{
+        The next question is chosen based on the answer history
 
         \vspace{1cm}
         \centerline{\includegraphics[width=0.6\linewidth]{figures/adaptive.pdf}}
     }
 
     \block{Input: Dependency Graph over DIGCOMP 2.0}{
-        Nodes: \textbf{800 knowledge components} of difficulty 1–6\\
-        Edges are prerequisites ($u \rightarrow v$ $\iff$ $u$ should be mastered before $v$)
+        Nodes: \textbf{800 knowledge components} of difficulty 1–5\\
+        Edges are prerequisites ($u \rightarrow v$ means, $u$ should be mastered before $v$)
 
         \includegraphics[width=\linewidth]{figures/graph}
 
@@ -261,38 +248,32 @@ g_j & \textnormal{otherwise.}
             \includegraphics[width=0.25\textwidth]{figures/digcomp.pdf}
         }
 
-        Each question is mapped to a knowledge component.
+        Each question is mapped to a unique (required) knowledge component
 
         \includegraphics[width=\linewidth]{figures/tags.png}
     }
-
-    % \block{Output: Example of CAT tree}{
-    %     \includegraphics[width=\linewidth]{figures/cat.png}
-    % }
 
 \end{columns}
 \begin{columns}
 \column{.55}
 \block{Greedy Selection}{
-    If the estimated level of the learner $\hat{\theta}_i$ is $2$, then:\\
+    If the estimated level of the student $\hat{\theta}_i$ is $2$:\\
     \includegraphics[width=\linewidth]{figures/example.pdf}
 }
 \column{.45}
 \block{Output: CAT tree}{
-    \includegraphics[width=\linewidth]{figures/cat.png}
+    \includegraphics[width=\linewidth]{figures/cat.pdf}
 }
 \end{columns}
 \begin{columns}
 \column{.6}
 \block{Application: Certifying the Digital Competencies of French citizens}{
-    % \begin{wrapfigure}{r}{0.2\colwidth}
-    %     \includegraphics[width=\linewidth]{figures/logo-pix.pdf}
-    % \end{wrapfigure}
-    \begin{minipage}{0.7\colwidth}
+    \begin{minipage}{0.75\colwidth}
     \begin{itemize}
-        \item \textbf{800 skeletons of exercises} based on evidence-centered design
-        \item Output: 3 adaptive tests of \textbf{20 questions}
-        \item So far, \textbf{514731 collected answers} in the database
+        \item \textbf{800 skeletons of exercises} based on \textbf{evidence-centered design}
+        \item \textbf{16 non-adaptive tests} measuring \textbf{50 knowledge components} over \textbf{5 difficulties}
+        \item Output: \textbf{3 adaptive tests} of \textbf{20 questions}
+        \item So far, \textbf{514731 collected answers} in the database from \textbf{36953} users
     \end{itemize}
     High school user data will be collected from September 2017:
     \begin{itemize}
@@ -305,8 +286,6 @@ g_j & \textnormal{otherwise.}
         \includegraphics[width=\linewidth]{figures/logo-pix.pdf}
     \end{minipage}
 }
-    % \end{minipage}
-    % \hfill
 \column{.4}
 \begin{subcolumns}
     \subcolumn{.33}
