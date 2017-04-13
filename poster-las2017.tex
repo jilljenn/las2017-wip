@@ -1,7 +1,7 @@
 %\documentclass{tikzposter}
 \documentclass[25pt, a0paper,
 %landscape,
-margin=0mm, innermargin=15mm, blockverticalspace=5mm, colspace=15mm, subcolspace=6mm]{tikzposter}
+margin=0mm, innermargin=15mm, blockverticalspace=5mm, colspace=15mm, subcolspace=1mm]{tikzposter}
 \usepackage{trace}
 \usepackage{amsmath}
 \usepackage{mathtools}
@@ -73,7 +73,8 @@ Scale=MatchUppercase]{OptimaLT Std DemiBold Italic}
     RIKEN Center for Advanced & Laboratoire de recherche & ENS Paris-Saclay & French Ministry of Education & Université Grenoble-Alpes\\
 Intelligence Project (AIP) & en informatique (LRI) & Cachan, France & Paris, France & Grenoble, France \\
 Tokyo, Japan & Orsay, France &  \texttt{francoise.tort} & \texttt{benjamin.marteau} & \texttt{nathalie.denos} \\
-\texttt{vie@jill-jenn.net} & \texttt{fabrice.popineau@lri.fr} & \texttt{@stef.ens-cachan.fr} & \texttt{@education.gouv.fr} & \texttt{@univ-grenoble-alpes.fr}
+\texttt{vie@jill-jenn.net} & \texttt{fabrice.popineau@lri.fr} & \texttt{@stef.ens-cachan.fr} & \texttt{@education.gouv.fr} & \texttt{@univ-grenoble-alpes.fr}\\
+%\includegraphics{figures/logo-pix.pdf} & \includegraphics{figures/logo-lri.pdf}
   \end{tabular}
     }
 %\institute{\raggedleft SUPELEC Systems Sciences (E3S), Computer Science Department, Gif-sur-Yvette, France \\[8mm]
@@ -164,6 +165,10 @@ Tokyo, Japan & Orsay, France &  \texttt{francoise.tort} & \texttt{benjamin.marte
 %\usenotestyle{Corner}
 %\usenotestyle{VerticalShading}
 \usenotestyle{Sticky}
+
+\usepackage{mdframed}
+\newmdenv[topline=false,bottomline=false,rightline=false,skipabove=0pt,skipbelow=0pt,innertopmargin=0pt,innerbottommargin=0pt]{sidebox}
+
 \begin{document}
 \maketitle[width=\linewidth,titletotopverticalspace=0pt]
 
@@ -190,7 +195,7 @@ Tokyo, Japan & Orsay, France &  \texttt{francoise.tort} & \texttt{benjamin.marte
             Students $i \in I$ have \textbf{unknown} level $\theta_i$\\
             Questions $j \in J$ have difficulty $d_j$ (potentially calibrated on data)
             \[ \Pr(\textsf{correct}_{ij}) \triangleq \Pr(\textsf{student}_i \textnormal{ answers correctly } \textsf{question}_j) \triangleq \frac1{1 + e^{-(\theta_i - d_j)}} \]
-            \hfill $\Rightarrow$ \textnormal{ \textbf{$\theta$ is easily estimated, but no feedback}}
+            \hfill $\Rightarrow$ \textnormal{ \textbf{$\theta_i$ is easily estimated (maximum likelihood), but no feedback}}
         }
         \vspace{1cm}
         \innerblock[]{DINA \& Attribute Hierarchy Model}{
@@ -206,13 +211,14 @@ g_j & \textnormal{otherwise.}
     }
 
     \block{Can we do better?}{
-        \innerblock[]{Our Heuristic Method}{
-            \raggedright
-            Knowledge components $1, \ldots, K$ contain a \textbf{tag} and a \textbf{difficulty} level (ex. \texttt{@url4})\\
-            \raggedleft KCs are linked in a \textbf{dependency graph}\\
-            \raggedright Students $i \in I$ have unknown \textbf{level} $\theta_i$ and knowledge $\in \{0, 1\}^K$\\
+        \innerblock[]{Our Heuristic Method}{ %\smash{
+            Knowledge components $1, \ldots, K$ \parbox[t]{0.5\linewidth}{\vspace{-0.6\baselineskip}\begin{sidebox}
+            contain a \textbf{tag} and a \textbf{difficulty} level\\
+            are linked in a \textbf{dependency graph}
+            \end{sidebox}}\\
+            Students $i \in I$ have \textbf{unknown} level $\theta_i$ and knowledge $\in \{0, 1\}^K$\\
             Questions $j \in J$ have a unique main requirement $\in \{1, \ldots, K\}$\\
-            \raggedleft $\Pr(\textsf{correct}_{ij})$ is same as in Item Response Theory
+            \[ \Pr(\textsf{correct}_{ij}) \textnormal{ is same as in Item Response Theory} \]
             \[ score(j) = \Pr(\textsf{correct}_{ij}) \cdot N_{\textsf{acquired nodes if correct}} + \Pr(\textsf{incorrect}_{ij}) \cdot N_{\textsf{non-acquired nodes if incorrect}} \]
         }
         \begin{itemize}
@@ -245,31 +251,19 @@ g_j & \textnormal{otherwise.}
     }
 
     \block{Input: Dependency Graph over DIGCOMP 2.0}{
-      % \includegraphics[width=\linewidth]{figures/domains.png}
-      % \begin{minipage}{0.4\textwidth}
-      %   5 domains of the DIGCOMP referential for numerical competencies \\
-      %   \begin{itemize}
-      %   \item Information \& Data Literacy
-      %   \item Communication \& Collaboration
-      %   \item Digital Content Creation
-      %   \item Safety
-      %   \item Problem Solving
-      %   \end{itemize}
-      % \end{minipage}
-      % \hfill
-      % \begin{minipage}[c]{0.55\textwidth}
-      \centerline{
-      \includegraphics[width=0.25\textwidth]{figures/digcomp-2.png}
-      }
-      % \end{minipage}
-      Tags are related to these domains.\\
+        Nodes: \textbf{800 knowledge components} of difficulty 1–6\\
+        Edges are prerequisites ($u \rightarrow v$ $\iff$ $u$ should be mastered before $v$)
+
+        \includegraphics[width=\linewidth]{figures/graph}
+
+        Based on DIGCOMP 2.0, the European Digital Competence Framework
+        \centerline{
+            \includegraphics[width=0.25\textwidth]{figures/digcomp.pdf}
+        }
+
+        Each question is mapped to a knowledge component.
+
         \includegraphics[width=\linewidth]{figures/tags.png}
-        % \begin{itemize}
-        %     \item Each validation triggers the validation of parents.
-        %     \item Each non-validation triggers the non-validation of children.
-        % \end{itemize}
-        % \includegraphics[width=\linewidth]{figures/example2.pdf}
-        % \includegraphics[width=\linewidth]{figures/example2.pdf}
     }
 
     % \block{Output: Example of CAT tree}{
@@ -277,46 +271,62 @@ g_j & \textnormal{otherwise.}
     % }
 
 \end{columns}
-\block{Example}{
-  \includegraphics[width=0.62\linewidth]{figures/example.pdf}
-  \hfill
-  \includegraphics[width=0.33\linewidth]{figures/cat.png}
+\begin{columns}
+\column{.55}
+\block{Greedy Selection}{
+    If the estimated level of the learner $\hat{\theta}_i$ is $2$, then:\\
+    \includegraphics[width=\linewidth]{figures/example.pdf}
 }
-
+\column{.45}
+\block{Output: CAT tree}{
+    \includegraphics[width=\linewidth]{figures/cat.png}
+}
+\end{columns}
+\begin{columns}
+\column{.6}
 \block{Application: Certifying the Digital Competencies of French citizens}{
-  \begin{minipage}[b]{0.36\linewidth}
+    % \begin{wrapfigure}{r}{0.2\colwidth}
+    %     \includegraphics[width=\linewidth]{figures/logo-pix.pdf}
+    % \end{wrapfigure}
+    \begin{minipage}{0.7\colwidth}
+    \begin{itemize}
+        \item \textbf{800 skeletons of exercises} based on evidence-centered design
+        \item Output: 3 adaptive tests of \textbf{20 questions}
+        \item So far, \textbf{514731 collected answers} in the database
+    \end{itemize}
     High school user data will be collected from September 2017:
-        \begin{itemize}
-            \item \textbf{800 skeletons of exercises} based on evidence-centered design
-            \item \textbf{800 knowledge components}
-            \item \textbf{3.5 million} high school students (grade 8 to 12)
-            \item \textbf{1.25 million} higher-education students
-            \item The platform is on GitHub (license AGPLv3)
-        \end{itemize}
+    \begin{itemize}
+        \item \textbf{3.5 million} high school students (grade 8 to 12)
+        \item \textbf{1.25 million} higher-education students
+    \end{itemize}
+    The platform is on GitHub (license AGPLv3)
     \end{minipage}
-    \begin{minipage}[b]{0.36\linewidth}
-      \centerline{\raisebox{-0cm}{\includegraphics[width=0.9\linewidth]{figures/pix.png}}}
+    \begin{minipage}{0.2\colwidth}
+        \includegraphics[width=\linewidth]{figures/logo-pix.pdf}
     \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.08\linewidth}
-      \centering
-    \includegraphics[width=0.8\textwidth]{figures/logo-uga.jpg}\\[1em]
-    \includegraphics[width=0.7\textwidth]{figures/logo-riken.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.08\linewidth}
-      \centering
-    \includegraphics[width=0.8\textwidth]{figures/logo-ensps.jpg}\\[1em]
-    \includegraphics[width=0.8\textwidth]{figures/logo-lri.pdf}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.08\linewidth}
-      \centering
-      \includegraphics[width=0.8\textwidth]{figures/logo-cs.png}\\[1em]
-      \includegraphics[width=0.8\textwidth]{figures/logo-men.pdf}
-    \end{minipage}
-
 }
+    % \end{minipage}
+    % \hfill
+\column{.4}
+\begin{subcolumns}
+    \subcolumn{.33}
+    \block{}{
+        \centering
+        \includegraphics[width=0.8\subcolwidth]{figures/logo-uga.jpg}\\[1em]
+        \includegraphics[width=0.7\subcolwidth]{figures/logo-riken.png}
+    }
+    \subcolumn{.33}
+    \block{}{
+        \includegraphics[width=0.8\subcolwidth]{figures/logo-ensps.jpg}\\[1em]
+        \includegraphics[width=0.8\subcolwidth]{figures/logo-lri.pdf}
+    }
+    \subcolumn{.33}
+    \block{}{
+        \includegraphics[width=0.8\subcolwidth]{figures/logo-cs.png}\\[1em]
+        \includegraphics[width=0.8\subcolwidth]{figures/logo-men.pdf}
+    }
+    \end{subcolumns}
+\end{columns}
 
 \end{document}
 

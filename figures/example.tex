@@ -7,8 +7,9 @@
 \setmathfont{XITS Math}
 \definecolor{pixblue}{RGB}{53,81,250}
 
-\def\correct{\textsf{correct}}
-\def\incorrect{\textsf{incorrect}}
+\def\pcorrect{p(\textsf{correct})}
+\def\correct{\textsf{if correct}}
+\def\incorrect{\textsf{if incorrect}}
 
 \usetikzlibrary{calc}
 
@@ -16,26 +17,26 @@
 \begin{tikzpicture}[
     xscale=2.1,
     pin distance=1cm,
-    every node/.style={rounded corners=1mm,minimum width=1.3cm,align=center},
+    every node/.style={rounded corners=1mm,minimum width=1.3cm,align=center,thick},
     every edge/.style={draw,->,>=stealth},
     every pin edge/.style={<-,red!70!black,shorten <=1mm}]
 \node[draw] (web1) at (1,0) {@web1};
-\node[draw,label=above:{\small $p(\correct)=0.5$\\\small $\correct \Rightarrow 2$ / $\incorrect \Rightarrow 2$\\[2mm]\normalsize $\mathbf{score=2}$}] (web2) at (2,0) {@web2};
+\node[draw,label=above:{\small $\pcorrect=0.5$\\\small $\correct \Rightarrow 2$ / $\incorrect \Rightarrow 2$\\[2mm]\normalsize $\mathbf{score=2}$}] (web2) at (2,0) {@web2};
 \node[draw] (web3) at (3,0) {@web3};
 \node[draw] (url2) at (2,-1) {@url2}; 
-\node[draw,very thick,pixblue,label={[pixblue]below:$\mathbf{score=2.73}$\\[2mm]\small $p(\correct) = 0.27$\\\small $\correct \Rightarrow 2$ / $\incorrect \Rightarrow 3$},pin={[red!70!black]45:best question to ask}] (url3) at (3,-1) {@url3};
+\node[draw,very thick,pixblue,label={[pixblue]below:$\mathbf{score=2.73}$\\[2mm]\small $\pcorrect = 0.27$\\\small $\correct \Rightarrow 2$ / $\incorrect \Rightarrow 3$},pin={[red!70!black]45:best question to ask}] (url3) at (3,-1) {@url3};
 \node[draw] (url4) at (4,-1) {@url4};
 \node[draw] (url5) at (5,-1) {@url5};
 
-\node[draw] (url2p) at (5.5,+1) {@url2}; 
-\node[draw] (url3p) at (6.5,+1) {@url3}; 
+\node[draw,green!50!black,very thick] (url2p) at (5.5,+1) {@url2}; 
+\node[draw,green!50!black,very thick] (url3p) at (6.5,+1) {@url3}; 
 \node[draw] (url4p) at (7.5,+1) {@url4};
 \node[draw] (url5p) at (8.5,+1) {@url5};
 
 \node[draw] (url2n) at (5.5,-2.5) {@url2}; 
-\node[draw] (url3n) at (6.5,-2.5) {@url3}; 
-\node[draw] (url4n) at (7.5,-2.5) {@url4};
-\node[draw] (url5n) at (8.5,-2.5) {@url5};
+\node[draw,red!70!black,very thick] (url3n) at (6.5,-2.5) {@url3}; 
+\node[draw,red!70!black,very thick] (url4n) at (7.5,-2.5) {@url4};
+\node[draw,red!70!black,very thick] (url5n) at (8.5,-2.5) {@url5};
 
 
 
@@ -45,19 +46,19 @@
 \draw (url3) edge (url4);
 \draw (url4) edge (url5);
 
-\draw (url2p) edge (url3p);
+\draw[green!50!black,very thick] (url2p) edge (url3p);
 \draw (url3p) edge (url4p);
 \draw (url4p) edge (url5p);
 
 \draw (url2n) edge (url3n);
-\draw (url3n) edge (url4n);
-\draw (url4n) edge (url5n);
+\draw[red!70!black,very thick] (url3n) edge (url4n);
+\draw[red!70!black,very thick] (url4n) edge (url5n);
 
-\draw [ thick, to path={-| (\tikztotarget)}] ($(url5.east) + (0.2,0.1)$) edge ($(url3p.south) + (0, -0.1)$);
-\draw [ thick, to path={-| (\tikztotarget)}] ($(url5.east) + (0.2,-0.1)$) edge ($(url3n.north) + (0, 0.1)$);
+\draw [ thick, to path={-| (\tikztotarget)},green!50!black] ($(url5.east) + (0.2,0.1)$) edge ($(url3p.south) + (0, -0.1)$);
+\draw [ thick, to path={-| (\tikztotarget)},red!70!black] ($(url5.east) + (0.2,-0.1)$) edge ($(url3n.north) + (0, 0.1)$);
 
-\node[draw=none, below of=url4p] {positive answer};
-\node[draw=none, above of=url4n] {negative answer};
+\node[draw=none,below of=url4p,green!50!black] {correct answer};
+\node[draw=none,above of=url4n,red!70!black] {incorrect answer};
 
 \end{tikzpicture}
 \end{document}

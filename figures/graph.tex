@@ -1,5 +1,5 @@
 \RequirePackage{luatex85}
-\documentclass{standalone}
+\documentclass[margin=5mm]{standalone}
 \usepackage{tikz}
 \usepackage{fontspec}
 \usepackage[vargreek-shape=unicode]{unicode-math}
@@ -14,7 +14,7 @@
 \begin{tikzpicture}[
     xscale=2.1,
     pin distance=1cm,
-    every node/.style={rounded corners=1mm,minimum width=1.3cm,align=center},
+    every node/.style={rounded corners=1mm,minimum width=1.3cm,align=center,thick},
     every edge/.style={draw,->,>=stealth},
     every pin edge/.style={<-,red!70!black,shorten <=1mm}]
 \node[draw] (web1) at (1,0) {@web1};
