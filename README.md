@@ -1,5 +1,7 @@
 # A Heuristic Method for Large-Scale Cognitive-Diagnostic Computerized Adaptive Testing
 
+In formative assessments, one wants to provide a useful feedback to the examinee at the end of the test. In order to reduce the number of questions asked in an assessment, adaptive testing models have been developed for cognitive diagnosis, such as the ones encountered in knowledge space theory. However, when the number of skills assessed is very huge, such methods cannot scale. In this paper, we present a new method to provide adaptive tests and useful feedback to the examinee, even with large databases of skills. It will be used in [PIX](https://pix.fr), a platform for certification of digital competencies for every French citizen.
+
 [Read the article (PDF)](https://jill-jenn.net/_static/works/a-heuristic-method-for-large-scale-cognitive-diagnostic-computerized-adaptive-testing.pdf).
 
 See our poster:
